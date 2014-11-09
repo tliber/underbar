@@ -86,7 +86,7 @@ var _ = {};
   
     var newArray = [];
     
-    _.each(collection, function(item, index){
+    _.each(collection, function(item){
       if (test(item)){
         newArray.push(item);}
     });
@@ -97,8 +97,29 @@ var _ = {};
   _.reject = function(collection, test) {
     // TIP: see if you can re-use _.filter() here, without simply
     // copying code in and modifying it
+    
+     var newArray = [];
+    
+    _.each(collection, function(item){
+      if (!test(item)){
+        newArray.push(item);}
+    });
+    return newArray;
   };
 
+    // var finArr = [];
+    // var DontArr = _.filter(collection, test);
+    // _.each(DontArr, function(item){
+      // if (item in collection){
+        // finArr.push(item);
+        // collection.slice(_.indexOf(collection, item), (_.indexOf(collection, item)+1));}
+    
+    // }}
+    // return r _.
+      // };
+   // var isEven = function(num) { return num % 2 === 0; };
+  // var evens = _.filter([1, 2, 3, 4, 5, 6], isEven);
+  // console.log(evens)
   // Produce a duplicate-free version of the array.
   _.uniq = function(array) {
   };
