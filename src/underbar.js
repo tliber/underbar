@@ -54,7 +54,15 @@ var _ = {};
   // Note: _.each does not have a return value, but rather simply runs the
   // iterator function over each item in the input collection.
   _.each = function(collection, iterator) {
-  };
+    if (collection.length != null){
+      for (var i = 0; i < collection.length; i++){
+        iterator(collection[i],i,collection);}}
+    else {  
+      for (var i in collection){
+        iterator(collection[i],i,collection);}}
+   };
+  
+  
 
   // Returns the index at which value can be found in the array, or -1 if value
   // is not present in the array.
@@ -75,6 +83,7 @@ var _ = {};
 
   // Return all elements of an array that pass a truth test.
   _.filter = function(collection, test) {
+  
   };
 
   // Return all elements of an array that don't pass a truth test.
