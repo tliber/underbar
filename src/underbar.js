@@ -140,7 +140,7 @@ var _ = {};
       // console.log(item);
     // });
   };
-  console.log(_.uniq([1, 2,2,2,2,2,2,2, 3, 4,4,4,4,4,99]));
+  // console.log(_.uniq([1, 2,2,2,2,2,2,2, 3, 4,4,4,4,4,99]));
   // console.log(_.uniq([1, 5,2,4,5,2,5]));
 
   // Return the results of applying an iterator to each element.
@@ -192,8 +192,17 @@ var _ = {};
   //     return total + number;
   //   }, 0); // should be 6
   _.reduce = function(collection, iterator, accumulator) {
+    if (accumulator == undefined) {
+      var accumulator = collection[0];
+    }
+    else {
+      var accumulator = accumulator;
+    }
+    _.each(collection, function(obj){
+      accumulator = iterator(accumulator, obj); 
+          })
+    return accumulator;
   };
-
   // Determine if the array or object contains a given value (using `===`).
   _.contains = function(collection, target) {
     // TIP: Many iteration problems can be most easily expressed in
