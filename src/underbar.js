@@ -121,15 +121,38 @@ var _ = {};
   // var evens = _.filter([1, 2, 3, 4, 5, 6], isEven);
   // console.log(evens)
   // Produce a duplicate-free version of the array.
-  _.uniq = function(array) {
-  };
+  _.uniq = function(array, sorted, iterator) {
+    var uniArr = [];
+    _.each(array, function(item){
+      if ((item in uniArr) == (false)){
+        uniArr.push(item);
+        console.log(uniArr);}
+      });
 
+
+
+    
+    // _.reject(array, function(item){
+
+      return uniArr;
+      
+
+      // console.log(item);
+    // });
+  };
+  console.log(_.uniq([1, 2,2,2,2,2,2,2, 3, 4,4,4,4,4,99]));
+  // console.log(_.uniq([1, 5,2,4,5,2,5]));
 
   // Return the results of applying an iterator to each element.
   _.map = function(collection, iterator) {
     // map() is a useful primitive iteration function that works a lot
     // like each(), but in addition to running the operation on all
     // the members, it also maintains an array of results.
+    var mArr = [];
+    _.each(collection, function(item){
+      mArr.push(iterator(item));
+    })
+    return mArr;
   };
 
   /*
