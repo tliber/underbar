@@ -126,25 +126,17 @@ var _ = {};
   // Produce a duplicate-free version of the array.
   _.uniq = function(array, sorted, iterator) {
     var uniArr = [];
-    _.each(array, function(item){
-      if ((item in uniArr) == (false)){
-        uniArr.push(item);
-        console.log(uniArr);}
-      });
-
-
-
     
-    // _.reject(array, function(item){
 
-      return uniArr;
+    _.each(array, function(item){
       
+      if (!(uniArr.indexOf(item) > -1)){
+        uniArr.push(item);
+        ;}
+      });
+    return uniArr;
 
-      // console.log(item);
-    // });
   };
-  // console.log(_.uniq([1, 2,2,2,2,2,2,2, 3, 4,4,4,4,4,99]));
-  // console.log(_.uniq([1, 5,2,4,5,2,5]));
 
   // Return the results of applying an iterator to each element.
   _.map = function(collection, iterator) {
@@ -179,7 +171,7 @@ var _ = {};
   // Calls the method named by functionOrKey on each value in the list.
   // Note: you will nead to learn a bit about .apply to complete this.
   _.invoke = function(collection, functionOrKey, args) {
-    return _.map(collection, functionOrKey)
+    return collection.apply(functionOrKey(args));
   };
 
   // Reduces an array or object to a single value by repetitively calling
@@ -222,10 +214,19 @@ var _ = {};
 
   // Determine whether all of the elements match a truth test.
   _.every = function(collection, iterator) {
-    // TIP: Try re-using reduce() here.
+    if (iterator === undefined){
+      iterator = _.identity;}
+    var breakFast = true;
+    _.each(collection, function(item){
+      console.log(item, iterator);
+      if ((iterator(item) === false) || (iterator(item) === (NaN)) || (iterator(item) === undefined) || (iterator(item) === 0)){
+         breakFast = false;
+         }
+    })
+    return breakFast;
   };
 
-  // Determine whether any of the elements pass a truth test. If no iterator is
+   // whether any of the elements pass a truth test. If no iterator is
   // provided, provide a default one
   _.some = function(collection, iterator) {
     // TIP: There's a very clever way to re-use every() here.
