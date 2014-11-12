@@ -171,8 +171,17 @@ var _ = {};
   // Calls the method named by functionOrKey on each value in the list.
   // Note: you will nead to learn a bit about .apply to complete this.
   _.invoke = function(collection, functionOrKey, args) {
-    return collection.apply(functionOrKey(args));
-  };
+    
+    // console.log(functionOrKey);
+    return _.map(collection, function(item){
+      if (typeof(functionOrKey) === 'function'){
+        return functionOrKey.apply(item);}
+      else{
+        return item[functionOrKey].apply(item)
+      }
+    })
+  }
+
 
   // Reduces an array or object to a single value by repetitively calling
   // iterator(previousValue, item) for each item. previousValue should be
@@ -218,9 +227,9 @@ var _ = {};
       iterator = _.identity;}
     var breakFast = true;
     _.each(collection, function(item){
-      console.log(item, iterator);
       if ((iterator(item) === false) || (iterator(item) === (NaN)) || (iterator(item) === undefined) || (iterator(item) === 0)){
          breakFast = false;
+         return;
          }
     })
     return breakFast;
@@ -229,10 +238,27 @@ var _ = {};
    // whether any of the elements pass a truth test. If no iterator is
   // provided, provide a default one
   _.some = function(collection, iterator) {
-    // TIP: There's a very clever way to re-use every() here.
-  };
+    // TIP: There's a very clever way to re-use every() her
+    // if _.every(collection, iterator) === true 
+    var atLeastOne = true;
+    
+    if (iterator === undefined){
+      iterator = _.identity;}
+    for (var i in collection){
+          console.log(iterator(collection[0]));
 
+      console.log(atLeastOne);0
+      if (!(iterator(i) == false)){
+        console.log('read as true')
+        atLeastOne = true;
+        break;  
+      }}
+      return atLeastOne;
+    };
+  
+    console.log(_.some([false,false]));
 
+  // console.log(_.some([42432,2,1,false,true, false]));
   /**
    * OBJECTS
    * =======
