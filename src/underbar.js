@@ -220,7 +220,6 @@ var _ = {};
     }, false);
   };
 
-
   // Determine whether all of the elements match a truth test.
   _.every = function(collection, iterator) {
     if (iterator === undefined){
@@ -238,25 +237,37 @@ var _ = {};
    // whether any of the elements pass a truth test. If no iterator is
   // provided, provide a default one
   _.some = function(collection, iterator) {
+    // console.log(collection.length);
+     if (iterator === undefined){
+      iterator = _.identity;}
+    for (var i in collection)
+      if ((iterator(collection[i]) == true) || (typeof(iterator(collection[i])) === "string")) {
+          return true;};
+    return false;
+      };
+    // _.contains(collection, function(item){
+
+    
     // TIP: There's a very clever way to re-use every() her
     // if _.every(collection, iterator) === true 
-    var atLeastOne = true;
+    // var atLeastOne = true;
     
-    if (iterator === undefined){
-      iterator = _.identity;}
-    for (var i in collection){
-          console.log(iterator(collection[0]));
+    // if (iterator === undefined){
+      // var iterator = _.identity;}
+    
+      
+    //       // console.log(iterator(collection[0]));
 
-      console.log(atLeastOne);0
-      if (!(iterator(i) == false)){
-        console.log('read as true')
-        atLeastOne = true;
-        break;  
-      }}
-      return atLeastOne;
-    };
+    //   console.log(atLeastOne);0
+    //   if (!(iterator(i) == false)){
+    //     console.log('read as true')
+    //     atLeastOne = true;
+    //     break;  
+    //   }}
+    //   return atLeastOne;
+    
   
-    console.log(_.some([false,false]));
+    // console.log(_.some(['eege',false,false]), _. identity);
 
   // console.log(_.some([42432,2,1,false,true, false]));
   /**
@@ -277,9 +288,14 @@ var _ = {};
   //   }, {
   //     bla: "even more stuff"
   //   }); // obj1 now contains key1, key2, key3 and bla
-  _.extend = function(obj) {
+  _.extend = function(obj, attrs) {
+    // console.log(arguments);
+    for (var i = 1; i < arguments.length; i++){
+      for (var j in arguments[i]){
+          obj[j] = arguments[i][j];}
+    };
+    return obj;
   };
-
   // Like extend, but doesn't ever overwrite a key that already
   // exists in obj
   _.defaults = function(obj) {
@@ -347,9 +363,21 @@ var _ = {};
   // input array. For a tip on how to make a copy of an array, see:
   // http://mdn.io/Array.prototype.slice
   _.shuffle = function(array) {
+    // console.log(array)
+  //   var copyArr = array;
+  //   var newArr = [];
+  //   while (!(array.length === newArr.length)){
+  //       console.log('arr leng', array)
+  //       var spliceAt = Math.floor(Math.random() * copyArr.length);
+  //       console.log(spliceAt);
+  //       newArr.push(copyArr.splice(spliceAt,(spliceAt + 1)));
+  //       console.log(newArr, copyArr);
+
+  // }
+  //   return newArr;
   };
 
-
+    // console.log(_.shuffle([1,2,3,4,5]));
   /**
    * Note: This is the end of the pre-course curriculum. Feel free to continue,
    * but nothing beyond here is required.
