@@ -288,9 +288,10 @@ var _ = {};
   //   }, {
   //     bla: "even more stuff"
   //   }); // obj1 now contains key1, key2, key3 and bla
-  _.extend = function(obj, attrs) {
+  _.extend = function(obj) {
     // console.log(arguments);
     for (var i = 1; i < arguments.length; i++){
+      
       for (var j in arguments[i]){
           obj[j] = arguments[i][j];}
     };
@@ -299,9 +300,22 @@ var _ = {};
   // Like extend, but doesn't ever overwrite a key that already
   // exists in obj
   _.defaults = function(obj) {
+    console.log(arguments);
+    for (var i = 1; i < arguments.length; i++){
+      for (var j in arguments[i]){
+          console.log(j + 'smoking on this j')     
+          if (!(obj.j) == false){
+            console.log(  obj[j]+ ' ' + '   object on the index is' + "tatayayay" + obj + ' this si the object ' + j + ' and this is the j')
+            // console.log(_.indexOf(obj, i));
+            obj[j] = arguments[i][j];}}
+    
+    };
+    return obj;
   };
-
-
+    // var to = {a: 'pony', b: NaN, c: "go"};
+    // var from = {a: 1, b: 2};
+    // var defaulted = _.defaults(to, from);
+    // console.log(defaulted);
   /**
    * FUNCTIONS
    * =========
@@ -340,6 +354,7 @@ var _ = {};
   // already computed the result for the given argument and return that value
   // instead if possible.
   _.memoize = function(func) {
+
   };
 
   // Delays a function for the given number of milliseconds, and then calls
@@ -349,8 +364,16 @@ var _ = {};
   // parameter. For example _.delay(someFunction, 500, 'a', 'b') will
   // call someFunction('a', 'b') after 500ms
   _.delay = function(func, wait) {
-  };
+    now = new Date;
+    past = now.getTime();
+    if (((new Date).getTime() - past) >= wait) {
+        return func(arguments[2, arguments.length])
 
+    };
+
+
+  };
+  _.delay(console.log('rgerg'), 100);
 
   /**
    * ADVANCED COLLECTION OPERATIONS
@@ -364,20 +387,17 @@ var _ = {};
   // http://mdn.io/Array.prototype.slice
   _.shuffle = function(array) {
     // console.log(array)
-  //   var copyArr = array;
-  //   var newArr = [];
-  //   while (!(array.length === newArr.length)){
-  //       console.log('arr leng', array)
-  //       var spliceAt = Math.floor(Math.random() * copyArr.length);
-  //       console.log(spliceAt);
-  //       newArr.push(copyArr.splice(spliceAt,(spliceAt + 1)));
-  //       console.log(newArr, copyArr);
-
-  // }
-  //   return newArr;
+    var copyArr = array.slice(0);
+    var newArr = [];
+    
+    while (!(array.length === newArr.length)){
+        var spliceAt = Math.floor(Math.random() * copyArr.length);
+        newArr.push((copyArr.splice(spliceAt, 1))[0]);
+  }
+    return newArr;
   };
+  
 
-    // console.log(_.shuffle([1,2,3,4,5]));
   /**
    * Note: This is the end of the pre-course curriculum. Feel free to continue,
    * but nothing beyond here is required.
@@ -404,8 +424,15 @@ var _ = {};
   //
   // Hint: Use Array.isArray to check if something is an array
   _.flatten = function(nestedArray, result) {
+      // var newAnce = String(nestedArray).replace("[", ' ');
+      // console.log(newAnce);
+      // newAnce.replace("]", '');
+      
+      // newAnce = Array.prototype.slice.call(newAnce)
+      // return newAnce;
   };
-
+    // var nestedArr = [1, [2], [3, [[[4]]]]];
+    // console.log(_.flatten(nestedArr));
   // Takes an arbitrary number of arrays and produces an array that contains
   // every item shared between all the passed-in arrays.
   _.intersection = function() {
