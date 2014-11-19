@@ -299,23 +299,20 @@ var _ = {};
   };
   // Like extend, but doesn't ever overwrite a key that already
   // exists in obj
-  _.defaults = function(obj) {
-    console.log(arguments);
+  
+
+  _.defaults = function(to ,from) {
+    var defaultVals = to;
     for (var i = 1; i < arguments.length; i++){
-      for (var j in arguments[i]){
-          console.log(j + 'smoking on this j')     
-          if (!(obj.j) == false){
-            console.log(  obj[j]+ ' ' + '   object on the index is' + "tatayayay" + obj + ' this si the object ' + j + ' and this is the j')
-            // console.log(_.indexOf(obj, i));
-            obj[j] = arguments[i][j];}}
-    
+      for (var j in arguments[i]){     
+          if (defaultVals[j] === undefined){
+
+            defaultVals[j] = arguments[i][j];
+          };
+          }
     };
-    return obj;
+    return defaultVals;
   };
-    // var to = {a: 'pony', b: NaN, c: "go"};
-    // var from = {a: 1, b: 2};
-    // var defaulted = _.defaults(to, from);
-    // console.log(defaulted);
   /**
    * FUNCTIONS
    * =========
@@ -364,17 +361,23 @@ var _ = {};
   // parameter. For example _.delay(someFunction, 500, 'a', 'b') will
   // call someFunction('a', 'b') after 500ms
   _.delay = function(func, wait) {
-    now = new Date;
-    past = now.getTime();
-    if (((new Date).getTime() - past) >= wait) {
-        return func(arguments[2, arguments.length])
-
+    var argArr = [];
+    
+    for (var i = 2;arguments.length > i; i++){
+      argArr.push(arguments[i])
     };
+    
+    return setInterval(function(argArr){
+      _.apply(func, argArr);
+    }, wait);
 
+    
+
+    // console.log(now.getTime());
 
   };
-  _.delay(console.log('rgerg'), 100);
-
+  // _.delay(console.log(), 100, "123123","123123123");
+  // setInterval(function () {console.log("Hello")}, 1);
   /**
    * ADVANCED COLLECTION OPERATIONS
    * ==============================
