@@ -351,7 +351,15 @@ var _ = {};
   // already computed the result for the given argument and return that value
   // instead if possible.
   _.memoize = function(func) {
-
+    return func;
+    var cache = {};
+    if (typeof(cache[func]) !== 'undefined'){
+      
+      return cache[func]}
+    else{
+      cache.push(func);
+      return func};
+      
   };
 
   // Delays a function for the given number of milliseconds, and then calls
@@ -367,8 +375,8 @@ var _ = {};
       argArr.push(arguments[i])
     };
     
-    return setInterval(function(argArr){
-      _.apply(func, argArr);
+    return setInterval(function(){
+      return func.apply(null, argArr);
     }, wait);
 
     
