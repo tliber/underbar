@@ -18,7 +18,7 @@ var _ = {};
    * ===========
    *
    * In this section, we'll have a look at functions that operate on collections
-   * of values; in JavaScript, a 'collection' is something that can contain a
+   * of values; insJavaScript, a 'collection' is something that can contain a
    * number of values--either an array or an object.
    *
    *
@@ -350,16 +350,29 @@ var _ = {};
   // _.memoize should return a function that when called, will check if it has
   // already computed the result for the given argument and return that value
   // instead if possible.
+  
+
+
   _.memoize = function(func) {
-    return func;
+    // return func;
     var cache = {};
-    if (typeof(cache[func]) !== 'undefined'){
+    return function(item){
+
+    
+    if ((cache[func(item)]) === undefined){
+      console.log('in if' + item);
+      var ans = func(item);
       
-      return cache[func]}
+      cache[func(item)] = ans;
+      //really confuse...if i remove console.log it stops passing specs..
+      console.log(cache[func]);
+      return cache[func(item)];}
+      
     else{
-      cache.push(func);
-      return func};
-      
+      return cache[func];
+      }
+    };
+  
   };
 
   // Delays a function for the given number of milliseconds, and then calls
@@ -378,11 +391,6 @@ var _ = {};
     return setInterval(function(){
       return func.apply(null, argArr);
     }, wait);
-
-    
-
-    // console.log(now.getTime());
-
   };
   // _.delay(console.log(), 100, "123123","123123123");
   // setInterval(function () {console.log("Hello")}, 1);
