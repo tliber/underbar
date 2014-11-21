@@ -360,17 +360,14 @@ var _ = {};
 
     
     if ((cache[func(item)]) === undefined){
-      console.log('in if' + item);
       var ans = func(item);
-      
-      cache[func(item)] = ans;
-      //really confuse...if i remove console.log it stops passing specs..
-      console.log(cache[func]);
+      var key = JSON.stringify(func(item))
+      cache[key] = ans;
       return cache[func(item)];}
       
     else{
-      return cache[func];
-      }
+      return cache[key];
+      };
     };
   
   };
